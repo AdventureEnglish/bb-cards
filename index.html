@@ -79,7 +79,8 @@
   .card.hide-answer .en, .card.hide-answer .jp{display:none;}
 
   .controls{padding:8px 14px max(10px,env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;gap:10px;flex:none;}
-  .play-row{display:flex;align-items:center;justify-content:center;gap:clamp(18px,6vw,26px);width:100%;max-width:520px;}
+  .play-row{display:flex;align-items:center;justify-content:center;gap:clamp(10px,4vw,24px);width:100%;max-width:540px;}
+  .nav.restart{color:var(--accent);font-size:27px;}
   .nav{
     width:clamp(48px,13vw,60px);height:clamp(48px,13vw,60px);border-radius:50%;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.10);
     font-size:24px;color:var(--ink);display:flex;align-items:center;justify-content:center;
@@ -163,6 +164,7 @@
   </div>
   <div class="controls">
     <div class="play-row">
+      <button class="nav restart" id="restartBtn" aria-label="範囲の最初に戻る" title="範囲の最初に戻る">⟲</button>
       <button class="nav" id="prevBtn" aria-label="前へ">‹</button>
       <button class="play" id="playBtn" aria-label="再生">▶</button>
       <button class="nav" id="nextBtn" aria-label="次へ">›</button>
@@ -214,6 +216,7 @@
     card: document.getElementById('card'),
     prevBtn: document.getElementById('prevBtn'),
     nextBtn: document.getElementById('nextBtn'),
+    restartBtn: document.getElementById('restartBtn'),
     playBtn: document.getElementById('playBtn'),
     autoChip: document.getElementById('autoChip'),
     speedChip: document.getElementById('speedChip'),
@@ -312,6 +315,7 @@
   };
   el.prevBtn.onclick = ()=>prev();
   el.nextBtn.onclick = ()=>next(true);
+  el.restartBtn.onclick = ()=>show(state.from, true); // back to first card of the range
   el.backBtn.onclick = goHome;
 
   el.audio.addEventListener('play', ()=> el.playBtn.textContent='❚❚');
