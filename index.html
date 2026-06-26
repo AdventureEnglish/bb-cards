@@ -44,9 +44,19 @@
   }
   .topbar .back{font-size:22px;color:#fff;padding:4px 8px;border-radius:10px;}
   .topbar .back:active{background:rgba(255,255,255,.2);}
-  .topbar .title{font-weight:700;font-size:16px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .topbar .count{font-variant-numeric:tabular-nums;font-weight:700;font-size:15px;background:rgba(255,255,255,.22);padding:6px 14px;border-radius:999px;white-space:nowrap;}
-  .topbar .count::after{content:" ▾";opacity:.8;}
+  .topbar .title{font-weight:700;font-size:16px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;}
+  .topbar .rangebtn{
+    font-weight:800;font-size:14px;background:#fff;color:var(--accent);
+    padding:8px 14px;border-radius:999px;white-space:nowrap;flex:none;
+    box-shadow:0 2px 8px rgba(0,0,0,.18);
+  }
+  .topbar .rangebtn:active{transform:scale(.95);}
+  .topbar .rangebtn.pulse{animation:rb 1.5s ease-in-out 0.4s 4;}
+  @keyframes rb{
+    0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,.7);}
+    50%{box-shadow:0 0 0 7px rgba(255,255,255,0);transform:scale(1.05);}
+  }
+  .topbar .count{font-variant-numeric:tabular-nums;font-weight:700;font-size:14px;background:rgba(255,255,255,.22);padding:6px 11px;border-radius:999px;white-space:nowrap;flex:none;}
 
   .stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:12px;}
   .card{
@@ -140,6 +150,7 @@
   <div class="topbar">
     <button class="back" id="backBtn" aria-label="戻る">‹</button>
     <div class="title" id="setTitle"></div>
+    <button class="rangebtn pulse" id="rangeBtn">🔢 範囲をえらぶ</button>
     <button class="count" id="countBtn">1 / 32</button>
   </div>
   <div class="stage">
@@ -167,7 +178,7 @@
 <!-- GRID OVERLAY -->
 <div id="grid">
   <div class="sheet">
-    <h3>カードをえらぶ（番号をタップで移動）</h3>
+    <h3>番号をタップ→ジャンプ ／ 範囲をえらんで「その週だけ」練習</h3>
     <div class="range-row">
       <span>範囲</span>
       <select id="fromSel"></select>
@@ -209,6 +220,7 @@
     ansChip: document.getElementById('ansChip'),
     backBtn: document.getElementById('backBtn'),
     grid: document.getElementById('grid'),
+    rangeBtn: document.getElementById('rangeBtn'),
     numGrid: document.getElementById('numGrid'),
     fromSel: document.getElementById('fromSel'),
     toSel: document.getElementById('toSel'),
@@ -353,11 +365,14 @@
   }
   el.rangeApply.onclick = applyRange;
   el.rangeAll.onclick = clearRange;
-  el.countBtn.onclick = ()=>{
+  function openGrid(){
     // preselect current range in the dropdowns
     el.fromSel.value = state.from; el.toSel.value = state.to;
     el.grid.style.display='flex';
-  };
+    el.rangeBtn.classList.remove('pulse'); // stop drawing attention once discovered
+  }
+  el.countBtn.onclick = openGrid;
+  el.rangeBtn.onclick = openGrid;
   function closeGrid(){ el.grid.style.display='none'; }
   el.grid.onclick = (e)=>{ if(e.target===el.grid) closeGrid(); };
 
