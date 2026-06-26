@@ -17,12 +17,12 @@
   body{
     font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,system-ui,sans-serif;
     background:var(--bg);color:var(--ink);
-    display:flex;flex-direction:column;min-height:100%;
+    display:flex;flex-direction:column;height:100dvh;overflow:hidden;
   }
   button{font-family:inherit;cursor:pointer;border:none;background:none;}
 
   /* ---------- Home (set chooser) ---------- */
-  #home{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;gap:28px;}
+  #home{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;gap:28px;overflow-y:auto;}
   #home h1{font-size:clamp(28px,6vw,44px);margin:0;letter-spacing:.04em;}
   #home p.sub{margin:0;color:var(--muted);font-size:15px;text-align:center;line-height:1.7;}
   .set-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;width:100%;max-width:460px;}
@@ -37,58 +37,75 @@
   .set-btn .nm{font-size:15px;color:var(--muted);}
 
   /* ---------- Player ---------- */
-  #player{flex:1;display:none;flex-direction:column;}
+  #player{flex:1;min-height:0;display:none;flex-direction:column;overflow:hidden;}
   .topbar{
-    display:flex;align-items:center;gap:10px;padding:12px 14px;
+    display:flex;align-items:center;gap:10px;padding:10px 14px;flex:none;
     background:var(--accent);color:#fff;
   }
   .topbar .back{font-size:22px;color:#fff;padding:4px 8px;border-radius:10px;}
   .topbar .back:active{background:rgba(255,255,255,.2);}
-  .topbar .title{font-weight:700;font-size:17px;flex:1;}
-  .topbar .count{font-variant-numeric:tabular-nums;font-weight:700;font-size:16px;background:rgba(255,255,255,.2);padding:4px 12px;border-radius:999px;}
+  .topbar .title{font-weight:700;font-size:16px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .topbar .count{font-variant-numeric:tabular-nums;font-weight:700;font-size:15px;background:rgba(255,255,255,.22);padding:6px 14px;border-radius:999px;white-space:nowrap;}
+  .topbar .count::after{content:" ▾";opacity:.8;}
 
-  .stage{flex:1;display:flex;align-items:center;justify-content:center;padding:18px;}
+  .stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:12px;}
   .card{
-    background:var(--card-bg);border-radius:28px;box-shadow:0 10px 34px rgba(0,0,0,.10);
-    width:100%;max-width:680px;min-height:46vh;
+    background:var(--card-bg);border-radius:24px;box-shadow:0 10px 34px rgba(0,0,0,.10);
+    width:100%;max-width:680px;height:100%;min-height:0;
     display:flex;flex-direction:column;align-items:center;justify-content:center;
-    padding:30px 26px 26px;gap:16px;text-align:center;position:relative;
+    padding:34px 22px 16px;gap:12px;text-align:center;position:relative;
     border-top:8px solid var(--accent);
   }
   .card .badge{
-    position:absolute;top:16px;left:20px;font-size:30px;font-weight:800;color:var(--accent);opacity:.85;z-index:1;
+    position:absolute;top:12px;left:18px;font-size:26px;font-weight:800;color:var(--accent);opacity:.85;z-index:1;
   }
   .card .pic{
-    max-width:100%;max-height:46vh;object-fit:contain;border-radius:16px;
-    background:#fff;
+    flex:1 1 auto;min-height:0;max-height:100%;max-width:100%;width:auto;
+    object-fit:contain;border-radius:14px;background:#fff;
   }
-  .card .en{font-size:clamp(24px,5vw,38px);font-weight:700;line-height:1.4;}
-  .card .jp{font-size:clamp(15px,3.4vw,20px);color:var(--muted);line-height:1.7;}
+  .card .en{font-size:clamp(22px,4.6vw,36px);font-weight:700;line-height:1.35;flex:none;}
+  .card .jp{font-size:clamp(14px,3.2vw,19px);color:var(--muted);line-height:1.6;flex:none;}
   /* answer-hidden (picture-only) mode */
   .card.hide-answer .en, .card.hide-answer .jp{display:none;}
 
-  .controls{padding:10px 18px 8px;display:flex;flex-direction:column;align-items:center;gap:14px;}
-  .play-row{display:flex;align-items:center;justify-content:center;gap:26px;width:100%;max-width:520px;}
+  .controls{padding:8px 14px max(10px,env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;gap:10px;flex:none;}
+  .play-row{display:flex;align-items:center;justify-content:center;gap:clamp(18px,6vw,26px);width:100%;max-width:520px;}
   .nav{
-    width:62px;height:62px;border-radius:50%;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.10);
-    font-size:26px;color:var(--ink);display:flex;align-items:center;justify-content:center;
+    width:clamp(48px,13vw,60px);height:clamp(48px,13vw,60px);border-radius:50%;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.10);
+    font-size:24px;color:var(--ink);display:flex;align-items:center;justify-content:center;
     transition:transform .1s;
   }
   .nav:active{transform:scale(.92);}
   .nav:disabled{opacity:.3;}
   .play{
-    width:96px;height:96px;border-radius:50%;background:var(--accent);color:#fff;
-    font-size:42px;display:flex;align-items:center;justify-content:center;
+    width:clamp(64px,18vw,88px);height:clamp(64px,18vw,88px);border-radius:50%;background:var(--accent);color:#fff;
+    font-size:clamp(30px,8vw,40px);display:flex;align-items:center;justify-content:center;
     box-shadow:0 8px 22px rgba(224,69,123,.45);transition:transform .1s;
   }
   .play:active{transform:scale(.93);}
-  .opts{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;padding-bottom:18px;}
+  .opts{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
   .chip{
-    font-size:14px;font-weight:600;color:var(--muted);background:#fff;
-    border:2px solid #e3e8ef;border-radius:999px;padding:8px 16px;display:flex;align-items:center;gap:6px;
+    font-size:13px;font-weight:600;color:var(--muted);background:#fff;
+    border:2px solid #e3e8ef;border-radius:999px;padding:7px 14px;display:flex;align-items:center;gap:6px;
   }
   .chip.on{color:#fff;background:var(--accent);border-color:var(--accent);}
   .speed-chip{cursor:pointer;}
+
+  /* range picker in grid sheet */
+  .range-row{
+    display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;
+    margin-bottom:16px;font-size:14px;color:var(--ink);
+  }
+  .range-row select{
+    font-family:inherit;font-size:16px;font-weight:700;padding:8px 10px;border-radius:12px;
+    border:2px solid #e3e8ef;background:#fff;color:var(--ink);
+  }
+  .mini-btn{
+    font-size:14px;font-weight:700;padding:9px 16px;border-radius:999px;
+    background:var(--accent);color:#fff;
+  }
+  .mini-btn.alt{background:#fff;color:var(--muted);border:2px solid #e3e8ef;}
+  .num.inrange{outline:3px solid var(--accent);outline-offset:-3px;}
 
   /* ---------- Grid overlay ---------- */
   #grid{
@@ -150,7 +167,15 @@
 <!-- GRID OVERLAY -->
 <div id="grid">
   <div class="sheet">
-    <h3>カードをえらぶ</h3>
+    <h3>カードをえらぶ（番号をタップで移動）</h3>
+    <div class="range-row">
+      <span>範囲</span>
+      <select id="fromSel"></select>
+      <span>〜</span>
+      <select id="toSel"></select>
+      <button class="mini-btn" id="rangeApply">この範囲だけ練習</button>
+      <button class="mini-btn alt" id="rangeAll">全部</button>
+    </div>
     <div class="num-grid" id="numGrid"></div>
   </div>
 </div>
@@ -185,12 +210,16 @@
     backBtn: document.getElementById('backBtn'),
     grid: document.getElementById('grid'),
     numGrid: document.getElementById('numGrid'),
+    fromSel: document.getElementById('fromSel'),
+    toSel: document.getElementById('toSel'),
+    rangeApply: document.getElementById('rangeApply'),
+    rangeAll: document.getElementById('rangeAll'),
     audio: document.getElementById('audio'),
     preloader: document.getElementById('preloader'),
   };
 
   const speeds = [0.75, 1.0, 1.25];
-  let state = { setKey:null, set:null, idx:0, auto:true, speedI:1, hideAns:false };
+  let state = { setKey:null, set:null, idx:0, auto:true, speedI:1, hideAns:false, from:0, to:0 };
 
   // ---- Build home ----
   const order = ['diamond','heart','clover','spade'];
@@ -208,6 +237,8 @@
     state.setKey = key;
     state.set = SETS[key];
     state.idx = 0;
+    state.from = 0;
+    state.to = state.set.cards.length-1;
     document.documentElement.style.setProperty('--accent', state.set.color);
     el.setTitle.textContent = state.set.name;
     el.home.style.display = 'none';
@@ -231,11 +262,17 @@
     el.pic.src = imgUrl(c);
     el.enText.textContent = c.en;
     el.jpText.textContent = c.jp;
-    el.countBtn.textContent = `${state.idx+1} / ${state.set.cards.length}`;
-    el.prevBtn.disabled = state.idx===0;
-    el.nextBtn.disabled = state.idx===state.set.cards.length-1;
+    const ranged = !(state.from===0 && state.to===state.set.cards.length-1);
+    el.countBtn.textContent = ranged
+      ? `${state.set.mark}${c.n}（${state.set.cards[state.from].n}–${state.set.cards[state.to].n}）`
+      : `${state.idx+1} / ${state.set.cards.length}`;
+    el.prevBtn.disabled = state.idx<=state.from;
+    el.nextBtn.disabled = state.idx>=state.to;
     // refresh number grid highlight
-    [...el.numGrid.children].forEach((n,j)=>n.classList.toggle('cur', j===state.idx));
+    [...el.numGrid.children].forEach((n,j)=>{
+      n.classList.toggle('cur', j===state.idx);
+      n.classList.toggle('inrange', ranged && j>=state.from && j<=state.to && j!==state.idx);
+    });
     // load audio
     el.audio.src = audioUrl(c);
     el.audio.playbackRate = speeds[state.speedI];
@@ -254,8 +291,8 @@
     el.audio.play().catch(()=>{});
   }
 
-  function next(autoplay){ if(state.idx < state.set.cards.length-1) show(state.idx+1, autoplay); }
-  function prev(){ if(state.idx>0) show(state.idx-1, false); }
+  function next(autoplay){ if(state.idx < state.to) show(state.idx+1, autoplay); }
+  function prev(){ if(state.idx > state.from) show(state.idx-1, false); }
 
   // ---- Controls ----
   el.playBtn.onclick = ()=>{
@@ -289,17 +326,38 @@
     el.ansChip.textContent = state.hideAns ? '答えを表示' : '答えを隠す';
   };
 
-  // ---- Number grid ----
+  // ---- Number grid + range picker ----
   function buildNumGrid(){
     el.numGrid.innerHTML='';
+    el.fromSel.innerHTML=''; el.toSel.innerHTML='';
     state.set.cards.forEach((c,j)=>{
       const n=document.createElement('button');
       n.className='num'; n.textContent=c.n;
-      n.onclick=()=>{ closeGrid(); show(j, true); };
+      n.onclick=()=>{ state.from=0; state.to=state.set.cards.length-1; closeGrid(); show(j, true); };
       el.numGrid.appendChild(n);
+      el.fromSel.appendChild(new Option(c.n, j));
+      el.toSel.appendChild(new Option(c.n, j));
     });
   }
-  el.countBtn.onclick = ()=>{ el.grid.style.display='flex'; };
+  function applyRange(){
+    let f=parseInt(el.fromSel.value,10), t=parseInt(el.toSel.value,10);
+    if(f>t){ const tmp=f; f=t; t=tmp; }
+    state.from=f; state.to=t;
+    closeGrid();
+    show(f, true);
+  }
+  function clearRange(){
+    state.from=0; state.to=state.set.cards.length-1;
+    closeGrid();
+    show(state.idx, false);
+  }
+  el.rangeApply.onclick = applyRange;
+  el.rangeAll.onclick = clearRange;
+  el.countBtn.onclick = ()=>{
+    // preselect current range in the dropdowns
+    el.fromSel.value = state.from; el.toSel.value = state.to;
+    el.grid.style.display='flex';
+  };
   function closeGrid(){ el.grid.style.display='none'; }
   el.grid.onclick = (e)=>{ if(e.target===el.grid) closeGrid(); };
 
