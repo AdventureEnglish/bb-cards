@@ -309,7 +309,7 @@
   }
 
   function next(autoplay){ if(state.idx < state.to) show(state.idx+1, autoplay); }
-  function prev(){ if(state.idx > state.from) show(state.idx-1, false); }
+  function prev(){ if(state.idx > state.from) show(state.idx-1, true); }
 
   // ---- Controls ----
   el.playBtn.onclick = ()=>{
