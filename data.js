@@ -36,7 +36,8 @@ window.SETS = {
       { n: 29, en: `Nancy gave me nine new nails for nothing.`, jp: `（無料で）`, id: `10EnlQJ3g0a0_ru7FhHcyh48FWN3HvD1P` },
       { n: 30, en: `Peter piper peeled a pink peach this morning.`, jp: `（今朝）`, id: `1FXi59Zbl38FoyInQ20PDHHWSxNk3mf3P` },
       { n: 31, en: `The queen gives a quiet party every other week.`, jp: `（1週間おきに）`, id: `19Gky96vXbQZZurA6C2KCgLS5gaBbOIRx` },
-      { n: 32, en: `Red rooster will finish reading before long.`, jp: `（間もなく）`, id: `1hKUuUOeKMFIzjxnMD8GZStejPZ377gWy` }
+      { n: 32, en: `Red rooster will finish reading before long.`, jp: `（間もなく）`, id: `1hKUuUOeKMFIzjxnMD8GZStejPZ377gWy` },
+      { n: 33, en: `Q & A`, jp: `質問と答え`, id: `1AGNcYfux5IHPggUhFO_O9y-cMeK2YHt2` }
     ]
   },
   heart: {
