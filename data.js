@@ -74,7 +74,8 @@ window.SETS = {
       { n: 29, en: `Ship and Sheep went shopping in the afternoon.`, jp: `（午後）`, id: `1JK6Sa_nM2xSKvJrlZEL5i5jmR-yp_zL5` },
       { n: 30, en: `Dr. Smith got thirty-three thin thermometers yesterday afternoon.`, jp: `（昨日の午後）`, id: `1bN5yuT0QbCVFYrRGdj-tXfFCDMe146If` },
       { n: 31, en: `These are the stamps that Father got at the shop.`, jp: `（店で）`, id: `1XXC3_9c1mY4zlcR29a1YINZzuOJhG-a7` },
-      { n: 32, en: `Mr. Whitney was drinking something white over there.`, jp: `（あそこで）`, id: `1rOHZYRHtvFb6c6SCePKDcS2_RPfGiTf5` }
+      { n: 32, en: `Mr. Whitney was drinking something white over there.`, jp: `（あそこで）`, id: `1rOHZYRHtvFb6c6SCePKDcS2_RPfGiTf5` },
+      { n: 33, en: `Q & A`, jp: `質問と答え`, id: `1rQ3sx0ksgfFXPTf0nwoCUOAdKSuu7XPu` }
     ]
   },
   clover: {
@@ -111,7 +112,8 @@ window.SETS = {
       { n: 29, en: `The bright boy had a light meal at seven.`, jp: `（7時に）`, id: `1K-q15c6HpavSYrWNQtnt8reJnkRxzlDa` },
       { n: 30, en: `Why does the spy dry his pants in the sun?`, jp: `（日向で）`, id: `1FJB6lapOgOQfTQQrlPMLr9VI9EXuNqlk` },
       { n: 31, en: `A mule was playing with a tube on the field.`, jp: `（野原で）`, id: `1Pez1yWZJYp0yUI6gGBeFfeahsVE9vkcw` },
-      { n: 32, en: `The gold made the old man happy for a while.`, jp: `（しばらくの間）`, id: `1CFpw1NkipoAWbUt0zwxCG_9DIDwYQkxd` }
+      { n: 32, en: `The gold made the old man happy for a while.`, jp: `（しばらくの間）`, id: `1CFpw1NkipoAWbUt0zwxCG_9DIDwYQkxd` },
+      { n: 33, en: `Q & A`, jp: `質問と答え`, id: `1BKWUUQ8yVqQM2LQDEcZuvi9vclbOMTih` }
     ]
   },
   spade: {
@@ -148,7 +150,8 @@ window.SETS = {
       { n: 29, en: `The early bird heard a word in the dark.`, jp: `（暗闇で）`, id: `1FM8NsfnQwguHvovUGEVJ0lhNccJ1GQ0v` },
       { n: 30, en: `The girl is washing a dirty bird with difficulty.`, jp: `（苦労して）`, id: `1Cci8UWPNDsAYjD0oWIQ1EfW-b2UPPkUR` },
       { n: 31, en: `Lazy Worm worked hard for the first time.`, jp: `（初めて）`, id: `1TtwvRNswn88StizwQd6cXpAbE5S8uGIx` },
-      { n: 32, en: `Dr. Turtle will return home in a few days.`, jp: `（2、3日すれば）`, id: `1rgokhez-sOqZ1frPDkigfKfb7cfa_yPZ` }
+      { n: 32, en: `Dr. Turtle will return home in a few days.`, jp: `（2、3日すれば）`, id: `1rgokhez-sOqZ1frPDkigfKfb7cfa_yPZ` },
+      { n: 33, en: `Q & A`, jp: `質問と答え`, id: `1VRnQrIcZqrBnEYsB6yRua1t0I1oMJhF0` }
     ]
   }
 };
