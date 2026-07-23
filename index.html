@@ -274,6 +274,8 @@
     state.idx = Math.max(0, Math.min(state.set.cards.length-1, i));
     const c = card();
     el.badge.textContent = `${state.set.mark}${c.n}`;
+    el.pic.style.display = '';
+    el.pic.onerror = () => { el.pic.style.display = 'none'; };
     el.pic.src = imgUrl(c);
     el.enText.textContent = c.en;
     el.jpText.textContent = c.jp;
