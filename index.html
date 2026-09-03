@@ -78,6 +78,34 @@
   /* answer-hidden (picture-only) mode */
   .card.hide-answer .en, .card.hide-answer .jp{display:none;}
 
+  /* ---------- Seek bar (memory / scrubber) ---------- */
+  .seek{
+    display:flex;align-items:center;gap:10px;width:100%;max-width:540px;
+    font-variant-numeric:tabular-nums;font-size:13px;font-weight:700;color:var(--muted);
+    touch-action:none;user-select:none;
+  }
+  .seek .t{flex:none;min-width:38px;text-align:center;}
+  .seek .track{
+    position:relative;flex:1;height:26px;display:flex;align-items:center;cursor:pointer;
+  }
+  .seek .rail{
+    position:absolute;left:0;right:0;height:8px;border-radius:999px;background:#e3e8ef;overflow:hidden;
+  }
+  .seek .ticks{
+    position:absolute;left:0;right:0;height:8px;border-radius:999px;pointer-events:none;
+    background-image:repeating-linear-gradient(to right,rgba(31,41,51,.22) 0 1px,transparent 1px 100%);
+    background-repeat:repeat-x;background-size:20% 100%;
+  }
+  .seek .fill{
+    position:absolute;left:0;height:8px;border-radius:999px;background:var(--accent);width:0;
+  }
+  .seek .knob{
+    position:absolute;width:20px;height:20px;border-radius:50%;background:#fff;left:0;
+    box-shadow:0 2px 8px rgba(0,0,0,.25);border:3px solid var(--accent);transform:translateX(-50%);
+    transition:transform .1s;
+  }
+  .seek .track:active .knob{transform:translateX(-50%) scale(1.15);}
+
   .controls{padding:8px 14px max(10px,env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;gap:10px;flex:none;}
   .play-row{display:flex;align-items:center;justify-content:center;gap:clamp(10px,4vw,24px);width:100%;max-width:540px;}
   .nav.restart{color:var(--accent);font-size:27px;}
@@ -163,6 +191,16 @@
     </div>
   </div>
   <div class="controls">
+    <div class="seek" id="seek">
+      <span class="t" id="curTime">0:00</span>
+      <div class="track" id="seekTrack" role="slider" aria-label="再生位置" tabindex="0">
+        <div class="rail"></div>
+        <div class="ticks" id="seekTicks"></div>
+        <div class="fill" id="seekFill"></div>
+        <div class="knob" id="seekKnob"></div>
+      </div>
+      <span class="t" id="durTime">0:00</span>
+    </div>
     <div class="play-row">
       <button class="nav restart" id="restartBtn" aria-label="範囲の最初に戻る" title="範囲の最初に戻る">⟲</button>
       <button class="nav" id="prevBtn" aria-label="前へ">‹</button>
@@ -231,6 +269,12 @@
     rangeAll: document.getElementById('rangeAll'),
     audio: document.getElementById('audio'),
     preloader: document.getElementById('preloader'),
+    seekTrack: document.getElementById('seekTrack'),
+    seekFill: document.getElementById('seekFill'),
+    seekKnob: document.getElementById('seekKnob'),
+    seekTicks: document.getElementById('seekTicks'),
+    curTime: document.getElementById('curTime'),
+    durTime: document.getElementById('durTime'),
   };
 
   const speeds = [0.75, 1.0, 1.25];
@@ -294,6 +338,8 @@
     el.audio.src = audioUrl(c);
     el.audio.playbackRate = speeds[state.speedI];
     el.audio.load();
+    el.seekFill.style.width = '0%'; el.seekKnob.style.left = '0%';
+    el.curTime.textContent = '0:00'; el.durTime.textContent = '0:00';
     if(autoplay) playCurrent();
     preloadNext();
   }
@@ -325,6 +371,49 @@
   el.audio.addEventListener('ended', ()=>{
     el.playBtn.textContent='▶';
     if(state.auto) setTimeout(()=>next(true), 700);
+  });
+
+  // ---- Seek bar (listen again from any point) ----
+  const fmtTime = s => {
+    if(!isFinite(s) || s<0) return '0:00';
+    const m = Math.floor(s/60), sec = Math.floor(s%60);
+    return `${m}:${String(sec).padStart(2,'0')}`;
+  };
+  let seeking = false;
+  function paintSeek(t, dur){
+    const d = dur || el.audio.duration;
+    const p = (d && isFinite(d) && d>0) ? Math.max(0, Math.min(1, t/d)) : 0;
+    el.seekFill.style.width = `${p*100}%`;
+    el.seekKnob.style.left = `${p*100}%`;
+    el.curTime.textContent = fmtTime(t);
+  }
+  function seekFromEvent(ev){
+    const d = el.audio.duration;
+    if(!d || !isFinite(d)) return;
+    const r = el.seekTrack.getBoundingClientRect();
+    const p = Math.max(0, Math.min(1, (ev.clientX - r.left) / r.width));
+    el.audio.currentTime = p*d;
+    paintSeek(p*d, d);
+  }
+  el.seekTrack.addEventListener('pointerdown', ev=>{
+    seeking = true;
+    try{ el.seekTrack.setPointerCapture(ev.pointerId); }catch(e){}
+    seekFromEvent(ev);
+  });
+  el.seekTrack.addEventListener('pointermove', ev=>{ if(seeking) seekFromEvent(ev); });
+  el.seekTrack.addEventListener('pointerup', ev=>{ if(seeking){ seekFromEvent(ev); seeking = false; } });
+  el.seekTrack.addEventListener('pointercancel', ()=>{ seeking = false; });
+  el.seekTrack.addEventListener('keydown', ev=>{
+    const d = el.audio.duration; if(!d || !isFinite(d)) return;
+    if(ev.key === 'ArrowLeft'){ el.audio.currentTime = Math.max(0, el.audio.currentTime-2); ev.preventDefault(); }
+    if(ev.key === 'ArrowRight'){ el.audio.currentTime = Math.min(d, el.audio.currentTime+2); ev.preventDefault(); }
+  });
+  el.audio.addEventListener('timeupdate', ()=>{ if(!seeking) paintSeek(el.audio.currentTime); });
+  el.audio.addEventListener('loadedmetadata', ()=>{
+    const d = el.audio.duration;
+    el.durTime.textContent = fmtTime(d);
+    if(d && isFinite(d) && d>0) el.seekTicks.style.backgroundSize = `${100/d}% 100%`; // 1秒ごとの目盛り
+    paintSeek(0, d);
   });
 
   el.autoChip.onclick = ()=>{
