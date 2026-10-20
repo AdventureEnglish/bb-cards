@@ -37,7 +37,15 @@ window.SETS = {
       { n: 30, en: `Peter piper peeled a pink peach this morning.`, jp: `（今朝）`, id: `1FXi59Zbl38FoyInQ20PDHHWSxNk3mf3P` },
       { n: 31, en: `The queen gives a quiet party every other week.`, jp: `（1週間おきに）`, id: `19Gky96vXbQZZurA6C2KCgLS5gaBbOIRx` },
       { n: 32, en: `Red rooster will finish reading before long.`, jp: `（間もなく）`, id: `1hKUuUOeKMFIzjxnMD8GZStejPZ377gWy` },
-      { n: 33, en: `Q & A`, jp: `質問と答え`, id: `1AGNcYfux5IHPggUhFO_O9y-cMeK2YHt2` }
+      { n: 33, en: `Q & A`, jp: `質問と答え`, id: `1AGNcYfux5IHPggUhFO_O9y-cMeK2YHt2`, qa: [
+        { q: `Who peeled a pink peach this morning?`,        jq: `けさ、だれがピンク色のももの皮をむきましたか。`,     a: `Peter Piper did.`,     ja: `ピーター パイパーくんです。` },
+        { q: `Who looks at George with a smile?`,            jq: `ほほえみながらジョージくんを見ているのはだれですか。`, a: `Gentle Giraffe does.`, ja: `ジェントル ジラフさんです。` },
+        { q: `What did Gray Goose get very quickly?`,        jq: `グレイ グースさんが、すばやく手に入れたのはなんですか。`, a: `Some golden eggs.`, ja: `金の卵です。` },
+        { q: `What did Lucy lose last month?`,               jq: `先月、ルーシーちゃんがなくしたものはなんですか。`,   a: `She lost her letter.`, ja: `手紙です。` },
+        { q: `When will the flying fish get to the forest?`, jq: `とんでいる魚はいつ森につきますか。`,                 a: `By four.`,            ja: `4時までにつきます。` },
+        { q: `Where has Henry gone?`,                        jq: `ヘンリーさんはどこへ行っちゃったのですか。`,         a: `He's gone to Hawaii.`, ja: `ハワイです。` },
+        { q: `How does Cathy come to school?`,               jq: `キャシーちゃんはどうやって学校へきますか。`,         a: `She comes on foot.`,  ja: `歩いてきます。` }
+      ] }
     ]
   },
   heart: {
@@ -75,7 +83,15 @@ window.SETS = {
       { n: 30, en: `Dr. Smith got thirty-three thin thermometers yesterday afternoon.`, jp: `（昨日の午後）`, id: `1bN5yuT0QbCVFYrRGdj-tXfFCDMe146If` },
       { n: 31, en: `These are the stamps that Father got at the shop.`, jp: `（店で）`, id: `1XXC3_9c1mY4zlcR29a1YINZzuOJhG-a7` },
       { n: 32, en: `Mr. Whitney was drinking something white over there.`, jp: `（あそこで）`, id: `1rOHZYRHtvFb6c6SCePKDcS2_RPfGiTf5` },
-      { n: 33, en: `Q & A`, jp: `質問と答え`, id: `1rQ3sx0ksgfFXPTf0nwoCUOAdKSuu7XPu` }
+      { n: 33, en: `Q & A`, jp: `質問と答え`, id: `1rQ3sx0ksgfFXPTf0nwoCUOAdKSuu7XPu`, qa: [
+        { q: `Is Boat younger than Yacht by ten years?`,                   jq: `ボートくんはヨットくんよりも10才若いですか。`,           a: `No, he isn't.`,   ja: `いいえ。` },
+        { q: `Was Mr. Whitney drinking something white over there?`,       jq: `ホイットニーさんは、あそこで何か白いものを飲んでいましたか。`, a: `Yes, he was.`,  ja: `はい、飲んでいました。` },
+        { q: `Does Willy want to get wet on Wednesday?`,                   jq: `水曜日にウィリーくんはぬれたいと思ってますか。`,         a: `No, he doesn't.`, ja: `いいえ。` },
+        { q: `Did Ship and Sheep go shopping in the morning?`,             jq: `午前中 シップくんとシープさんは買い物に行きましたか。`,   a: `No, they didn't. They went in the afternoon.`, ja: `いいえ。午後、買い物に行きました。` },
+        { q: `How many thermometers did Dr. Smith get yesterday afternoon?`, jq: `昨日の午後、医者のスミスさんは体温計を何本手にいれましたか。`, a: `Thirty-three.`, ja: `33本です。` },
+        { q: `What is Victor?`,                                           jq: `ビクターさんの職業はなんですか。`,                       a: `He is a violinist.`, ja: `バイオリンひきです。` },
+        { q: `What did Charlie go to China for?`,                         jq: `チャーリーさんは、なにをしに中国へ行ったのですか。`,     a: `On business. He went on business.`, ja: `仕事です。仕事をしに行きました。` }
+      ] }
     ]
   },
   clover: {
@@ -113,7 +129,15 @@ window.SETS = {
       { n: 30, en: `Why does the spy dry his pants in the sun?`, jp: `（日向で）`, id: `1FJB6lapOgOQfTQQrlPMLr9VI9EXuNqlk` },
       { n: 31, en: `A mule was playing with a tube on the field.`, jp: `（野原で）`, id: `1Pez1yWZJYp0yUI6gGBeFfeahsVE9vkcw` },
       { n: 32, en: `The gold made the old man happy for a while.`, jp: `（しばらくの間）`, id: `1CFpw1NkipoAWbUt0zwxCG_9DIDwYQkxd` },
-      { n: 33, en: `Q & A`, jp: `質問と答え`, id: `1BKWUUQ8yVqQM2LQDEcZuvi9vclbOMTih` }
+      { n: 33, en: `Q & A`, jp: `質問と答え`, id: `1BKWUUQ8yVqQM2LQDEcZuvi9vclbOMTih`, qa: [
+        { q: `What is the name of the hotel Jay stayed at?`,        jq: `ジェイさんが泊まったホテルの名前はなんといいますか。`,   a: `The Pumpkin Hotel.`, ja: `パンプキンホテルです。` },
+        { q: `How long did he stay there?`,                        jq: `どのくらい泊まったのですか。`,                           a: `For a few days.`,    ja: `2〜3日です。` },
+        { q: `How many times a day does Mr. Lake bake a cake?`,    jq: `レイクさんは1日に何回ケーキを焼きますか。`,             a: `Twice a day.`,       ja: `2回です。` },
+        { q: `Does Mike like to write letters in German?`,         jq: `マイクくんはドイツ語で手紙を書くのが好きですか。`,       a: `No, he doesn't. He likes to write letters in Japanese.`, ja: `いいえ。日本語で書くのが好きです。` },
+        { q: `What was Daisy doing in the rain?`,                  jq: `雨の中でデイジーちゃんは何をしていたのですか。`,         a: `She was waiting for the train.`, ja: `電車を待っていました。` },
+        { q: `What time did the bright boy have a light meal?`,    jq: `頭のよい男の子は、何時に軽く食事をしましたか。`,         a: `At seven. He had it at seven.`,  ja: `7時です。7時に軽く食べました。` },
+        { q: `Is the ugly umbrella happy or unhappy on a fine day?`, jq: `晴れの日、みにくいカサはハッピーですか、それともハッピーではないですか。`, a: `It's unhappy.`, ja: `ハッピーではありません。` }
+      ] }
     ]
   },
   spade: {
@@ -151,7 +175,15 @@ window.SETS = {
       { n: 30, en: `The girl is washing a dirty bird with difficulty.`, jp: `（苦労して）`, id: `1Cci8UWPNDsAYjD0oWIQ1EfW-b2UPPkUR` },
       { n: 31, en: `Lazy Worm worked hard for the first time.`, jp: `（初めて）`, id: `1TtwvRNswn88StizwQd6cXpAbE5S8uGIx` },
       { n: 32, en: `Dr. Turtle will return home in a few days.`, jp: `（2、3日すれば）`, id: `1rgokhez-sOqZ1frPDkigfKfb7cfa_yPZ` },
-      { n: 33, en: `Q & A`, jp: `質問と答え`, id: `1VRnQrIcZqrBnEYsB6yRua1t0I1oMJhF0` }
+      { n: 33, en: `Q & A`, jp: `質問と答え`, id: `1VRnQrIcZqrBnEYsB6yRua1t0I1oMJhF0`, qa: [
+        { q: `Can Rosy Rose drive a car?`,                      jq: `ロージー ローズさんは車の運転ができますか。`,         a: `Yes, she can.`,            ja: `はい、できます。` },
+        { q: `How much was the dress that the woman bought?`,   jq: `女の人が買ったドレスはいくらでしたか。`,               a: `It was fifty dollars.`,    ja: `50ドルでした。` },
+        { q: `Where was the young couple last Monday?`,         jq: `若いカップルはこのまえの月曜日、どこにいましたか。`,   a: `In the country. They were in the country.`, ja: `いなかです。2人はいなかにいました。` },
+        { q: `Why did Ms. Goat toast a bar of soap?`,           jq: `ゴートさんはどうしてせっけんをトーストしたのですか。`, a: `It was a mistake. She did it by mistake.`, ja: `間違えたのです。間違えてトーストしました。` },
+        { q: `What is the small dog called by everyone?`,       jq: `小さな犬はみんなになんと呼ばれているのですか。`,       a: `Paul. He is called Paul.`, ja: `ポールです。ポールと呼ばれています。` },
+        { q: `Did the mouse find a house to live in?`,          jq: `そのねずみは自分の住む家をみつけましたか。`,           a: `No, he didn't.`,           ja: `いいえ。` },
+        { q: `How many sentences have you learned by heart?`,   jq: `文章をいくつおぼえましたか。`,                         a: `Well... sixty-four. Right. Say them aloud.`, ja: `えーと…64です。そう。大きな声で全部言ってごらんなさい。` }
+      ] }
     ]
   }
 };

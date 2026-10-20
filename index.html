@@ -78,6 +78,29 @@
   /* answer-hidden (picture-only) mode */
   .card.hide-answer .en, .card.hide-answer .jp{display:none;}
 
+  /* ---------- Q&A card (33) ---------- */
+  .card .qa{display:none;}
+  .card.qa-mode .qa{
+    display:block;width:100%;flex:1 1 auto;min-height:0;overflow-y:auto;
+    text-align:left;-webkit-overflow-scrolling:touch;
+  }
+  .card.qa-mode .pic{flex:0 0 auto;max-height:34%;}
+  .card.qa-mode .en, .card.qa-mode .jp{display:none;}
+  .qa .item{display:flex;gap:9px;padding:7px 2px;border-bottom:1px solid #eef1f5;}
+  .qa .item:last-child{border-bottom:none;}
+  .qa .no{
+    flex:none;min-width:22px;font-weight:800;font-size:14px;color:var(--accent);
+    font-variant-numeric:tabular-nums;padding-top:2px;
+  }
+  .qa .txt{flex:1;min-width:0;}
+  .qa .q{font-size:clamp(14px,2.9vw,18px);font-weight:700;line-height:1.45;}
+  .qa .a{font-size:clamp(13px,2.7vw,17px);font-weight:700;line-height:1.45;color:var(--ink);margin-top:3px;}
+  /* 日本語訳は英文より薄い色で（質問・答えとも同じ色） */
+  .qa .jq, .qa .ja{font-size:clamp(11px,2.3vw,14px);font-weight:500;line-height:1.5;color:#a3adb8;}
+  /* 「答えを隠す」中は、Q&Aカードでは答えだけ隠して質問は残す */
+  .card.qa-mode.hide-answer .qa{display:block;}
+  .card.qa-mode.hide-answer .qa .a, .card.qa-mode.hide-answer .qa .ja{display:none;}
+
   /* ---------- Seek bar (memory / scrubber) ---------- */
   .seek{
     display:flex;align-items:center;gap:10px;width:100%;max-width:540px;
@@ -188,6 +211,7 @@
       <img class="pic" id="pic" alt="">
       <div class="en" id="enText"></div>
       <div class="jp" id="jpText"></div>
+      <div class="qa" id="qaBox"></div>
     </div>
   </div>
   <div class="controls">
@@ -252,6 +276,7 @@
     enText: document.getElementById('enText'),
     jpText: document.getElementById('jpText'),
     card: document.getElementById('card'),
+    qaBox: document.getElementById('qaBox'),
     prevBtn: document.getElementById('prevBtn'),
     nextBtn: document.getElementById('nextBtn'),
     restartBtn: document.getElementById('restartBtn'),
@@ -323,6 +348,25 @@
     el.pic.src = imgUrl(c);
     el.enText.textContent = c.en;
     el.jpText.textContent = c.jp;
+    // Q&Aカード（33番）は英文の質問と答えを一覧表示する
+    const hasQa = Array.isArray(c.qa) && c.qa.length > 0;
+    el.card.classList.toggle('qa-mode', hasQa);
+    el.qaBox.innerHTML = '';
+    if(hasQa){
+      c.qa.forEach((it,i)=>{
+        const row = document.createElement('div'); row.className = 'item';
+        const no = document.createElement('div'); no.className = 'no'; no.textContent = `${i+1}.`;
+        const txt = document.createElement('div'); txt.className = 'txt';
+        const q = document.createElement('div'); q.className = 'q'; q.textContent = it.q;
+        txt.appendChild(q);
+        if(it.jq){ const jq = document.createElement('div'); jq.className = 'jq'; jq.textContent = it.jq; txt.appendChild(jq); }
+        const a = document.createElement('div'); a.className = 'a'; a.textContent = it.a;
+        txt.appendChild(a);
+        if(it.ja){ const ja = document.createElement('div'); ja.className = 'ja'; ja.textContent = it.ja; txt.appendChild(ja); }
+        row.append(no, txt); el.qaBox.appendChild(row);
+      });
+      el.qaBox.scrollTop = 0;
+    }
     const ranged = !(state.from===0 && state.to===state.set.cards.length-1);
     el.countBtn.textContent = ranged
       ? `${state.set.mark}${c.n}（${state.set.cards[state.from].n}–${state.set.cards[state.to].n}）`
